@@ -1,28 +1,15 @@
 # .github/workflows/app.yaml
-name: My Python Project
-on: push
+name: Lint Typecheck Test
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-
-    services:
-      db_service:
-        image: postgres
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-          POSTGRES_PASSWORD: postgres
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - 5432:5432
 
     steps:
       - name: Check out repository code
@@ -46,7 +33,7 @@ jobs:
       - name: Install dependencies
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
-          pipenv install --deploy --dev
+          pipenv install --dev
       - name: Run test suite
         run: |
           pipenv run test -svvv
