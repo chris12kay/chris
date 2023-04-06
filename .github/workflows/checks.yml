@@ -40,4 +40,5 @@ jobs:
       #     pipenv run pylint
       - name: Run test
         run: |
+          pipenv install test
           pipenv run test
