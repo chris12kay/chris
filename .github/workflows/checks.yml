@@ -36,8 +36,8 @@ jobs:
           pipenv install --dev
       - name: Run linter
         run: |
-          npm install -g lint
-          pipenv run lint
+          pipenv install pylint
+          pipenv run pylint index.py
       - name: Run formatting check
         run: |
           pipenv run format --check
