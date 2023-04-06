@@ -17,11 +17,26 @@ jobs:
 runs:
   using: composite
   steps:
+    # Setup Python (faster than using Python container)
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.7"
+
     - name: Install pipenv
       run: |
-        pip install pipenv
-    - name: Run Linting and tests
+        python -m pip install --upgrade pipenv wheel
+    - id: cache-pipenv
+      uses: actions/cache@v1
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+
+    - name: Install dependencies
+      if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: |
         pipenv install --dev
+    - name: Run Linting and tests
+      run: |
         pipenv run lint
         pipenv run test
