@@ -34,9 +34,8 @@ jobs:
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
           pipenv install --dev
-      - name: Run linter
-        run: |
           pipenv run lint
+
       - name: Run formatting check
         run: |
           pipenv run format --check
