@@ -35,7 +35,7 @@ runs:
     - name: Install dependencies
       if: steps.cache-pipenv.outputs.cache-hit != 'true'
       run: |
-        pipenv install --dev
+        pipenv install
     - name: Run Linting and tests
       run: |
         pipenv run lint
