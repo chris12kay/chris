@@ -1,0 +1,28 @@
+name: Lint Typecheck Test
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run tests
+        runs:
+          using: composite
+          steps:
+            - name: Install pipenv
+              shell: bash
+              run: pip install pipenv
+            - name: Run Linting and tests
+              shell: bash
+              run: |
+                pipenv install --dev
+                pipenv run lint
+                pipenv run test
