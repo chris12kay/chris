@@ -19,5 +19,3 @@ if __name__=="__main__":
     app.listen(port)
     print(f"Application is ready and listening on port {port}")
     tornado.ioloop.IOLoop.current().start()
-
-    
