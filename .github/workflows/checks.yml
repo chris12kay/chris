@@ -8,19 +8,21 @@ on:
       - synchronize
 
 jobs:
-  test-job:
+  example-job:
     runs-on: ubuntu-latest
-    runs:
-      using: composite
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install pipenv
-        shell: bash
-        run: pip install pipenv
-      - name: Run Linting and tests
-        shell: bash
-        run: |
-          pipenv install --dev
-          pipenv run lint
-          pipenv run test
+
+runs:
+  using: composite
+  steps:
+    - name: Install pipenv
+      shell: bash
+      run: pip install pipenv
+    - name: Run Linting and tests
+      shell: bash
+      run: |
+        pipenv install --dev
+        pipenv run lint
+        pipenv run test
