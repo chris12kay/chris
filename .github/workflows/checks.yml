@@ -18,10 +18,9 @@ runs:
   using: composite
   steps:
     - name: Install pipenv
-      shell: bash
-      run: pip install pipenv
+      run: |
+        pip install pipenv
     - name: Run Linting and tests
-      shell: bash
       run: |
         pipenv install --dev
         pipenv run lint
