@@ -24,28 +24,29 @@ jobs:
       - name: Install pipenv
         run: |
           python -m pip install --upgrade pipenv wheel
-      # - id: cache-pipenv
-       # uses: actions/cache@v1
-        # with:
-        #   path: ~/.local/share/virtualenvs
-        #   key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+      - id: cache-pipenv
+        uses: actions/cache@v1
+        with:
+          path: ~/.local/share/virtualenvs
+          key: ${{ runner.os }}-pipenv-${{ hashFiles('**/Pipfile.lock') }}
 
       - name: Install dependencies
-        #if: steps.cache-pipenv.outputs.cache-hit != 'true'
+        if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
           pipenv install --dev
       - name: Run linter
         run: |
+          npm install -g lint
           pipenv run lint
-      # - name: Run formatting check
-      #   run: |
-      #     pipenv run format --check
-      # - name: Setup node.js (for pyright)
-      #   uses: actions/setup-node@v1
-      #   with:
-      #     node-version: "12"
+      - name: Run formatting check
+        run: |
+          pipenv run format --check
+      - name: Setup node.js (for pyright)
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12"
 
-      # - name: Run type checking
-      #   run: |
-      #     npm install -g pyright
-      #     pipenv run typecheck
+      - name: Run type checking
+        run: |
+          npm install -g pyright
+          pipenv run typecheck
