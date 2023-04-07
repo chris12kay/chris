@@ -20,7 +20,7 @@ jobs:
       #   run: 
       - name: Run tests
         run: |
-          pip3 install pipenv
+          pip install pipenv
       - name: Check files using the black formatter
         run: |
           pipenv install black
