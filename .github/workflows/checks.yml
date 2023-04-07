@@ -25,4 +25,4 @@ jobs:
         run: |
           pipenv --version
           pipenv install pylint
-          python -m pylint
+          pipenv run pylint
