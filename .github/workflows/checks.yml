@@ -28,4 +28,4 @@ jobs:
       - name: Run linter
         run: |
           pipenv install pylint
-          pipenv run pylint invoi/ test/
+          pipenv run pylint
