@@ -27,5 +27,5 @@ jobs:
           pipenv run black invoi/ test/
       - name: Run linter
         run: |
-          pipenv install pylint
-          pipenv run pylint
+          pipenv install test
+          pipenv run test invoi/ test/
