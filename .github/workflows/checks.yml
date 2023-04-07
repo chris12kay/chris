@@ -24,4 +24,5 @@ jobs:
       - name: Check files using the black formatter
         run: |
           pipenv --version
+          pipenv install pylint
           python -m pylint
