@@ -17,8 +17,7 @@ jobs:
         with:
           python-version: 3.11
       - name: Install pipenv
-        run: pip install pipenv
+        run: pip3 install pipenv
       - name: Run tests
         run: |
-          pipenv install --dev
           pipenv run pylint
