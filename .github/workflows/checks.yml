@@ -1,4 +1,3 @@
-# .github/workflows/app.yaml
 name: Lint Typecheck Test
 on:
   pull_request:
@@ -34,10 +33,10 @@ jobs:
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
           pipenv install --dev
-      # - name: Run linter
-      #   run: |
-      #     pipenv install pylint
-      #     pipenv run pylint
+      - name: Run linter
+        run: |
+          pipenv install pylint
+          pipenv run pylint
       - name: Run test
         run: |
           pipenv install pytest
