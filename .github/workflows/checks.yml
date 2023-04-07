@@ -23,6 +23,5 @@ jobs:
           pip3 install pipenv
       - name: Check files using the black formatter
         run: |
-          pipenv --version
           pipenv install pylint
-          pipenv run pylint
+          pipenv run pylint index.py
