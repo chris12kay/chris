@@ -24,4 +24,4 @@ jobs:
       - name: Check files using the black formatter
         run: |
           pipenv install black
-          pipenv run black index.py
+          pipenv run black
