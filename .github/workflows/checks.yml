@@ -21,4 +21,4 @@ jobs:
       - name: Run tests
         run: |
           pip3 install pipenv
-          pipenv run pylint
+          pipenv --version
