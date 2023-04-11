@@ -1,5 +1,4 @@
 name: Lint Typecheck Test
-
 on:
   pull_request:
     types:
@@ -8,19 +7,25 @@ on:
       - synchronize
 
 jobs:
-  test-job:
+  build:
     runs-on: ubuntu-latest
-    runs:
-      using: composite
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install pipenv
-        shell: bash
-        run: pip install pipenv
-      - name: Run Linting and tests
-        shell: bash
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.11
+      # - name: Install pipenv
+      #   run: 
+      - name: Run tests
         run: |
-          pipenv install --dev
-          pipenv run lint
-          pipenv run test
+          pip install pipenv
+      - name: Check files using the black formatter
+        run: |
+          pipenv install black
+          pipenv run black invoi/ test/
+      - name: Run linter
+        run: |
+          pipenv install test
+          pipenv run test invoi/ test/
